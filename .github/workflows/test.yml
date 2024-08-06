@@ -82,16 +82,16 @@ jobs:
         if: matrix.pydantic-version == 'pydantic-v2'
         run: pip install "pydantic>=2.0.2,<3.0.0"
       - run: mkdir coverage
-    #   - name: Instrument code
-    #     uses: AryazE/auto-dylin/instrument@main
+      - name: Instrument code
+        uses: AryazE/auto-dylin/instrument@main
       - name: Test
         run: bash scripts/test.sh
         env:
           COVERAGE_FILE: coverage/.coverage.${{ runner.os }}-py${{ matrix.python-version }}
           CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}
-    #   - name: Report results
-    #     if: always()
-    #     uses: AryazE/auto-dylin/report@main
+      - name: Report results
+        if: always()
+        uses: AryazE/auto-dylin/report@main
       - name: Store coverage files
         uses: actions/upload-artifact@v4
         with:
